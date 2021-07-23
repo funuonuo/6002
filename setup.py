@@ -89,4 +89,7 @@ setup(
     author_email='thu-coai-developer@googlegroups.com',
     python_requires='>=3.5',
     zip_safe=False
+    
+    
+    123
 )
