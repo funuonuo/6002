@@ -6,7 +6,7 @@ from convlab2.policy.larl.multiwoz.utils.nlp import normalize
 from convlab2.policy.larl.multiwoz.utils import util, delexicalize
 from convlab2.policy.larl.multiwoz import corpora_inference
 from convlab2.policy.larl.multiwoz.latent_dialog import domain
-from convlab2.policy.larl.multiwoz.latent_dialog.models_task import SysPerfectBD2Cat
+from convlab2.policy.larl.multiwoz.latent_dialog.models_task import SysPerfectBD2Gauss
 from convlab2.policy import Policy
 from convlab2.util.file_util import cached_path
 from convlab2.util.multiwoz.state import default_state
@@ -331,7 +331,7 @@ class LaRL(Policy):
 
         config.use_gpu = config.use_gpu and torch.cuda.is_available()
         self.corpus = corpora_inference.NormMultiWozCorpus(config)
-        self.model = SysPerfectBD2Cat(self.corpus, config)
+        self.model = SysPerfectBD2Gauss(self.corpus, config)
         self.config = config
         if config.use_gpu:
             self.model.load_state_dict(torch.load(
@@ -901,7 +901,7 @@ if __name__ == '__main__':
         dec_use_attn=True,
         dec_rnn_cell='lstm',
         dec_cell_size=300,
-        dec_attn_mode='cat',
+        dec_attn_mode='Gauss',
         y_size=10,
         k_size=20,
         beta=0.001,
