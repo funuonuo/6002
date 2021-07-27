@@ -301,7 +301,7 @@ class LaRL(Policy):
             dec_use_attn=True,
             dec_rnn_cell='lstm',
             dec_cell_size=300,
-            dec_attn_mode='cat',
+            dec_attn_mode='gauss',
             y_size=10,
             k_size=20,
             beta=0.001,
@@ -325,7 +325,7 @@ class LaRL(Policy):
             preview_batch_num=None,
             k=domain_info.input_length(),
             init_range=0.1,
-            pretrain_folder='2019-09-20-21-43-06-sl_cat',
+            pretrain_folder='2019-09-20-21-43-06-sl_gauss',
             forward_only=False
         )
 
@@ -925,7 +925,7 @@ if __name__ == '__main__':
         preview_batch_num=None,
         k=domain_info.input_length(),
         init_range=0.1,
-        pretrain_folder='2019-09-20-21-43-06-sl_cat',
+        pretrain_folder='2019-09-20-21-43-06-sl_gauss',
         forward_only=False
     )
 
