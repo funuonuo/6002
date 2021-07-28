@@ -247,7 +247,7 @@ class LaRL(Policy):
 
 
         temp_path = os.path.dirname(os.path.abspath(__file__))
-        #print(temp_path)
+        print(temp_path)
         zip_ref = zipfile.ZipFile(archive_file, 'r')
         zip_ref.extractall(temp_path)
         zip_ref.close()
