@@ -325,7 +325,7 @@ class LaRL(Policy):
             preview_batch_num=None,
             k=domain_info.input_length(),
             init_range=0.1,
-            pretrain_folder='2018-11-26-17-37-06-sys_sl_bdu2gauss',
+            pretrain_folder='2018-11-16-00-23-41-sys_sl_bdu2gauss',
             forward_only=False
         )
 
@@ -925,7 +925,7 @@ if __name__ == '__main__':
         preview_batch_num=None,
         k=domain_info.input_length(),
         init_range=0.1,
-        pretrain_folder='2018-11-26-17-37-06-sys_sl_bdu2gauss',
+        pretrain_folder='2018-11-16-00-23-41-sys_sl_bdu2gauss',
         forward_only=False
     )
 
