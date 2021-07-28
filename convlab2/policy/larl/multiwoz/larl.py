@@ -901,7 +901,7 @@ if __name__ == '__main__':
         dec_use_attn=True,
         dec_rnn_cell='lstm',
         dec_cell_size=300,
-        dec_attn_mode='Gauss',
+        dec_attn_mode='gauss',
         y_size=10,
         k_size=20,
         beta=0.001,
