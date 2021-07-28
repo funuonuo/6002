@@ -334,8 +334,8 @@ class LaRL(Policy):
                 os.path.join(temp_path, 'larl_model/best-model')))
             self.model.cuda()
         else:
-            self.model.load_state_dict(torch.load(os.path.join(
-                temp_path, 'larl_model/best-model'), map_location=lambda storage, loc: storage))
+            self.model.load_state_dict(torch.load(
+                '/root/NeuralDialog-LaRL/larl_model/best-model'), map_location=lambda storage, loc: storage))
         self.model.eval()
         self.dic = pickle.load(
             open(os.path.join(temp_path, 'larl_model/svdic.pkl'), 'rb'))
