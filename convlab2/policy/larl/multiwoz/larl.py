@@ -325,17 +325,17 @@ class LaRL(Policy):
             forward_only=False
         )
 
-        config.use_gpu = config.use_gpu or torch.cuda.is_available()
+        config.use_gpu = config.use_gpu and torch.cuda.is_available()
         self.corpus = corpora_inference.NormMultiWozCorpus(config)
         self.model = SysPerfectBD2Gauss(self.corpus, config)
         self.config = config
         if config.use_gpu:
+            self.model.load_state_dict(torch.load(os.path.join(
+                temp_path, 'larl_model/best-model'), map_location=lambda storage, loc: storage))
+        else:
             self.model.load_state_dict(torch.load(
                 os.path.join(temp_path, 'larl_model/best-model')))
             self.model.cuda()
-        else:
-            self.model.load_state_dict(torch.load(os.path.join(
-                temp_path, 'larl_model/best-model'), map_location=lambda storage, loc: storage))
         self.model.eval()
         self.dic = pickle.load(
             open(os.path.join(temp_path, 'larl_model/svdic.pkl'), 'rb'))
