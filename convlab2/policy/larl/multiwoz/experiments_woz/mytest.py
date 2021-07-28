@@ -10,7 +10,7 @@ from convlab2.policy.larl.multiwoz.latent_dialog.utils import Pack, prepare_dirs
 import convlab2.policy.larl.multiwoz.latent_dialog.corpora as corpora
 from convlab2.policy.larl.multiwoz.latent_dialog.data_loaders import BeliefDbDataLoaders
 from convlab2.policy.larl.multiwoz.latent_dialog.evaluators import MultiWozEvaluator
-from convlab2.policy.larl.multiwoz.latent_dialog.models_task import SysPerfectBD2Cat
+from convlab2.policy.larl.multiwoz.latent_dialog.models_task import SysPerfectBD2Gauss
 from convlab2.policy.larl.multiwoz.latent_dialog.main import train, validate
 import convlab2.policy.larl.multiwoz.latent_dialog.domain as domain
 from convlab2.policy.larl.multiwoz.experiments_woz.dialog_utils import task_generate
@@ -33,7 +33,7 @@ config = Pack(
     max_dec_len=50,
     backward_size=2,
     batch_size=32,
-    use_gpu=False,
+    use_gpu=True,
     op='adam',
     init_lr=0.001,
     l2_norm=1e-05,
@@ -47,18 +47,14 @@ config = Pack(
     utt_cell_size=300,
     bi_utt_cell=True,
     enc_use_attn=True,
-    dec_use_attn=True,
+    dec_use_attn=False,
     dec_rnn_cell='lstm',
     dec_cell_size=300,
     dec_attn_mode='cat',
-    y_size=10,
-    k_size=20,
-    beta=0.001,
-    simple_posterior=True,
-    contextual_posterior=True,
-    use_mi=False,
+    y_size=200,
+    beta=0.01,
+    simple_posterior=False,
     use_pr=True,
-    use_diversity=False,
     #
     beam_size=20,
     fix_batch=True,
@@ -71,10 +67,10 @@ config = Pack(
     save_model=True,
     early_stop=False,
     gen_type='greedy',
-    preview_batch_num=None,
+    preview_batch_num=50,
     k=domain_info.input_length(),
     init_range=0.1,
-    pretrain_folder='2019-06-20-21-43-06-sl_cat',
+    pretrain_folder='2018-11-16-00-23-41-sys_sl_bdu2gauss',
     forward_only=False
 )
 set_seed(config.seed)
@@ -109,7 +105,7 @@ test_data = BeliefDbDataLoaders('Test', test_dial, config)
 
 evaluator = MultiWozEvaluator('SysWoz')
 
-model = SysPerfectBD2Cat(corpus, config)
+model = SysPerfectBD2Gauss(corpus, config)
 
 if config.use_gpu:
     model.cuda()
